@@ -1,13 +1,11 @@
 package ru.iFellow;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-@Data
-@Getter
-@Setter
 public class Response {
-    private int id;
-    private int squareResult;
+
+    public static String message(Integer square){
+        return "Square: " + square.toString();
+    }
+    public static String message(Integer id, Integer square){
+        return "ID: " + id.toString() + "\nSquare: " + square.toString();
+    }
 }

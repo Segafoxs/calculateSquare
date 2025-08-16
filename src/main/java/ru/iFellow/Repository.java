@@ -2,19 +2,16 @@ package ru.iFellow;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Repository {
     private static Map <Integer, Integer> results = new HashMap<Integer, Integer>();
-
 
     public static void setResults(int id, int result) {
         results.put(id, result);
     }
 
     public static Integer getResults(int id) {
-        Integer res = results.get(id);
-        return res;
+        return results.get(id);
     }
 
     public static Integer getKey(){

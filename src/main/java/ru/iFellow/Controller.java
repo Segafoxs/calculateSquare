@@ -1,8 +1,8 @@
 package ru.iFellow;
-
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
@@ -11,20 +11,26 @@ public class Controller {
     public static void main(String[] args) {
         SpringApplication.run(Controller.class, args);
     }
-    @GetMapping(value = "/getSquare/{id}")
-    public Integer getSquare(@PathVariable int id) {
+    @GetMapping(value = "/api/square/{id}")
+    public ResponseEntity<?> getSquare(@PathVariable int id) {
         Integer query = Repository.getResults(id);
         if (query == null){
-            return 0;
+            throw new SquareNotFoundException("Значение с ID " + id + " не найдено.");
         }
         else {
-            return query;
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(Response.message(query));
         }
     }
 
     @PostMapping("/api/square")
-    public Integer setSquare(@RequestBody Service service){
-        service.square();
-        return service.getId();
+    public ResponseEntity<?> setSquare(@RequestBody Service service){
+        service.setSquareX();
+        service.setId();
+        service.saveResult();
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(Response.message(service.getId(), service.getSquareX()));
     }
 }

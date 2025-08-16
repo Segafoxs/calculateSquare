@@ -1,21 +1,21 @@
 package ru.iFellow;
-
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.Random;
 
 @Data
 public class Service {
     private int x;
     private int id;
+    private int squareX;
 
-
-    public void square(){
-        id = Repository.getKey();
-        Repository.setResults(id, x*x);
-
+    public void setSquareX() {
+        this.squareX = x * x;
     }
 
+    public void setId(){
+        this.id = Repository.getKey();
+    }
+
+    public void saveResult(){
+        Repository.setResults(id, x*x);
+    }
 }
